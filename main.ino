@@ -42,7 +42,7 @@ int botaoPressionado() {
   else if(digitalRead(verde.botao)) {
     return 3;
   }
-  return -1; // se nenhum botão foi apertado
+  return -1; // nenhum botao apertado
 }
 
 
