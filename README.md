@@ -14,3 +14,7 @@ jogador acerta as sequências.
    piscando na cor **amarela**
 3. Na primeira ocorrência de um erro na sequência o LED RGB acenderá
    na cor **vermelha**
+
+### LINK TINKERCAD ###
+O código pode ser compilado junto do circuito no Tinkercad!
+link: https://www.tinkercad.com/things/dlm1daAcoLM-genius-simon
