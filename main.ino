@@ -20,8 +20,6 @@ int leds[4] = {amarelo.led, vermelho.led, azul.led, verde.led};
 
 int botoes[4] = {amarelo.botao, vermelho.botao, azul.botao, verde.botao};
 
-///////////////////////////////////
-
 int* sequenciaAleatoria() {
   int* sequencia = new int[84];
   for(int i = 0; i < 84; i++) {
@@ -44,7 +42,7 @@ int botaoPressionado() {
   else if(digitalRead(verde.botao)) {
     return 3;
   }
-  return -1; // se nenhum botão foi apertado, return -1;
+  return -1; // se nenhum botão foi apertado
 }
 
 
@@ -67,13 +65,10 @@ void piscaTodosLeds(int tempoAceso) {
     delay(500);
 }
 
-//////////////////////////////////////
-
 void setup() {
   
   Serial.begin(9600);
   
-  // declara as entradas dos componentes
   pinMode(vermelho.led, OUTPUT);
   pinMode(verde.led, OUTPUT);
   pinMode(amarelo.led, OUTPUT);
@@ -93,7 +88,6 @@ void setup() {
 
 void loop() {
 
-  //pisca todos os leds pra mostrar inicio de uma nova rodada
   for(int i = 0; i < 3; i++) {
     piscaTodosLeds(600);
   }
@@ -102,14 +96,12 @@ void loop() {
   int numRodada = 0;
   int errou = false;
 
-  // inicia jogo
   do{
 
     int botaoAtivado = -1;
 
-    numRodada++; // numRodada = 1;
+    numRodada++;
 
-    //led rgb pisca amarelo, avisando inicio de uma sequencia
     for(int i = 0; i < 2; i++) {
       analogWrite(ledRGB.red, 170); 
   	  analogWrite(ledRGB.green, 130);
@@ -119,15 +111,12 @@ void loop() {
       delay(400);
     }
 
-    // pisca sequencia
     for(int i = 0; i < numRodada; i++) {
       piscaLed(leds[sequenciaBase[i]], 700);
     }
 
-    // tentativa jogador
     for(int i = 0; i < numRodada; i++) {
 
-      // enquanto nenhum botão for apertado, não sairá do loop while
       while(1) {
         botaoAtivado = botaoPressionado();
         if(botaoAtivado != -1) {
@@ -140,7 +129,6 @@ void loop() {
       }
 
       if(errou) {
-        // rgb pisca vermelho
         analogWrite(ledRGB.red, 170);
         delay(1500);
         analogWrite(ledRGB.red, 0);
@@ -148,7 +136,6 @@ void loop() {
       }
     }
     if(!errou) {
-      // pisca verde se acertou a sequencia
       analogWrite(ledRGB.green, 170);
       delay(600);
       analogWrite(ledRGB.green, 0);
